@@ -2,10 +2,13 @@ FROM node:latest
 
 MAINTAINER Wagner
 
-COPY build-your-own-radar/ /app
-
 WORKDIR /app
 
-RUN npm install && npm test && ls -la
+RUN git clone https://github.com/thoughtworks/build-your-own-radar.git \
+	&& cd build-your-own-radar \	
+	&& npm install \
+	&& npm test
+
+WORKDIR /app/build-your-own-radar
 
 ENTRYPOINT ["npm","run","dev"]
